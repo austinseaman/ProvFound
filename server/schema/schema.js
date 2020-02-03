@@ -1,5 +1,7 @@
 const graphql = require('graphql');
 const _ = require('lodash');
+const Doctor = require('../models/doctor');
+const Plan = require('../models/plan')
 
 const { GraphQLObjectType,
     GraphQLSchema,
@@ -8,67 +10,58 @@ const { GraphQLObjectType,
     GraphQLList,
 } = graphql;
 
-let doctors = [
-    {
-        id: '1',
-        insId: ['1', '4'],
-        doctorName: 'Dr. Otto Octavius',
-        city: 'Schenectady',
-        specialty: 'Biotechnology',
-        // insuranceAccepted: 'SquidMed'
-    },
-    {
-        id: '2',
-        insId: ['2', '3', '4'],
-        doctorName: 'Dr. Walter Jackson Freeman II',
-        city: 'Washington, D.C.',
-        specialty: 'Neurology',
-        // insuranceAccepted: 'Transorbital'
-    },
-    {
-        id: '3',
-        insId: ['3', '4'],
-        doctorName: 'Dr. Jack Kevorkian',
-        city: 'Pontiac',
-        specialty: 'Pathology',
-        // insuranceAccepted: 'MuertAssist United'
-    }
-];
+// let doctors = [
+//     {
+//         id: '1',
+//         insId: ['1', '4'],
+//         doctorName: 'Dr. Otto Octavius',
+//         city: 'Schenectady',
+//         specialty: 'Biotechnology'
+//     },
+//     {
+//         id: '2',
+//         insId: ['2', '3', '4'],
+//         doctorName: 'Dr. Walter Jackson Freeman II',
+//         city: 'Washington, D.C.',
+//         specialty: 'Neurology'
+//     },
+//     {
+//         id: '3',
+//         insId: ['3', '4'],
+//         doctorName: 'Dr. Jack Kevorkian',
+//         city: 'Pontiac',
+//         specialty: 'Pathology'
+//     }
+// ];
 
-let plans = [
-    // For each insurance plan, the 'docId' must correspond to
-    // the 'id' of the doctor that takes that insurance.
-
-    // Try to find a way to let each insurance take an array
-    // of 'docId's.. Otherwise, you will have to make
-    // hundreds of objects for each insurance plan, with 
-    // different 'docId's.. Which frankly.. Sucks. And
-    // is bad.
-    {
-        id: '1',
-        docId: ['1'],
-        insName: 'SquidMed',
-        usualCoPay: '$100'
-    },
-    {
-        id: '2',
-        docId: ['2'],
-        insName: 'Transorbital',
-        usualCoPay: '$25'
-    },
-    {
-        id: '3',
-        docId: ['2', '3'],
-        insName: 'MuertAssist',
-        usualCoPay: '$666'
-    },
-    {
-        id: '4',
-        docId: ['1', '2', '3'],
-        insName: 'United',
-        usualCoPay: '$30'
-    }
-]
+// let plans = [
+//     // For each insurance plan, the 'docId' must correspond to
+//     // the 'id' of the doctor that takes that insurance.
+//     {
+//         id: '1',
+//         docId: ['1'],
+//         insName: 'SquidMed',
+//         usualCoPay: '$100'
+//     },
+//     {
+//         id: '2',
+//         docId: ['2'],
+//         insName: 'Transorbital',
+//         usualCoPay: '$25'
+//     },
+//     {
+//         id: '3',
+//         docId: ['2', '3'],
+//         insName: 'MuertAssist',
+//         usualCoPay: '$666'
+//     },
+//     {
+//         id: '4',
+//         docId: ['1', '2', '3'],
+//         insName: 'United',
+//         usualCoPay: '$30'
+//     }
+// ]
 
 // DoctorType sets up the schema for our provider. A model
 // for what data the doctor carries. The types must be
@@ -89,7 +82,7 @@ const DoctorType = new GraphQLObjectType({
         insuranceAccepted: {
             type: new GraphQLList(InsuranceType),
             resolve(parent, args) {
-                return _.filter(plans, { docId: [parent.id] })
+                // return _.filter(plans, { docId: [parent.id] })
                 // return plans.filter(item =>  {
                 //     console.log(item)
                 //     return item.docId.some(docId => {
@@ -111,7 +104,7 @@ const InsuranceType = new GraphQLObjectType({
         doctorsAccepting: {
             type: new GraphQLList(DoctorType),
             resolve(parent, args) {
-                return _.filter(doctors, { insId: [parent.id] })
+                // return _.filter(doctors, { insId: [parent.id] })
             //     return doctors.filter(item => {
             //         console.log(item)
             //         return item.insId.some(insId => {
@@ -135,32 +128,69 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
                 // Code to get data from DB or other source
-                // console.log(typeof (args.id))
-                return _.find(doctors, { id: args.id });
+                // return _.find(doctors, { id: args.id });
             }
         },
         insurance: {
             type: InsuranceType,
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
-                return _.find(insurance, { id: args.id });
+                // return _.find(insurance, { id: args.id });
             }
         },
         doctors: {
             type: new GraphQLList(DoctorType),
             resolve(parent, args) {
-                return doctors
+                // return doctors
             }
         },
         plans: {
             type: new GraphQLList(InsuranceType),
             resolve(parent, args) {
-                return plans
+                // return plans
             }
         }
     }
 });
 
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        addDoctor: {
+            type: DoctorType,
+            args: {
+                doctorName: { type: GraphQLString },
+                city: { type: GraphQLString },
+                specialty: { type: GraphQLString }
+            },
+            resolve(parent, args){
+                let doctor = new Doctor({
+                    doctorName: args.doctorName,
+                    city: args.city,
+                    specialty: args.specialty
+                });
+                return doctor.save();
+            }
+        },
+        addPlan: {
+            type: InsuranceType,
+            args: {
+                insName: { type: GraphQLString },
+                usualCoPay: { type: GraphQLString },
+                docId: { type: GraphQLID }
+            },
+            resolve(parent, args){
+                let plan = new Plan({
+                    insName: args.insName,
+                    usualCoPay: args.usualCoPay,
+                    docId: args.docId
+                })
+            }
+        }
+    }
+})
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation: Mutation
 });

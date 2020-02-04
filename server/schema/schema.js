@@ -90,6 +90,7 @@ const DoctorType = new GraphQLObjectType({
                 //         return docId === parent.id
                 //     })
                 // })
+                return Plan.find({ docId: parent.id })
             }
         }
     })
@@ -112,6 +113,7 @@ const InsuranceType = new GraphQLObjectType({
             //             return insId === parent.id
             //         })
             //     })
+            return Doctor.find({ insId: parent.id })
             }
         }
     })
@@ -129,6 +131,7 @@ const RootQuery = new GraphQLObjectType({
             resolve(parent, args) {
                 // Code to get data from DB or other source
                 // return _.find(doctors, { id: args.id });
+                return Doctor.findById(args.id)
             }
         },
         insurance: {
@@ -136,23 +139,29 @@ const RootQuery = new GraphQLObjectType({
             args: { id: { type: GraphQLID } },
             resolve(parent, args) {
                 // return _.find(insurance, { id: args.id });
+                return Plan.findById(args.id)
             }
         },
         doctors: {
             type: new GraphQLList(DoctorType),
             resolve(parent, args) {
                 // return doctors
+                return Doctor.find({})
             }
         },
         plans: {
             type: new GraphQLList(InsuranceType),
             resolve(parent, args) {
                 // return plans
+                return Plan.find({})
             }
         }
     }
 });
 
+
+// Must find a way to add an array of 'docId's and 'insId's
+// to their respective mutations.
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
@@ -161,13 +170,15 @@ const Mutation = new GraphQLObjectType({
             args: {
                 doctorName: { type: GraphQLString },
                 city: { type: GraphQLString },
-                specialty: { type: GraphQLString }
+                specialty: { type: GraphQLString },
+                insId: { type: GraphQLID }
             },
             resolve(parent, args){
                 let doctor = new Doctor({
                     doctorName: args.doctorName,
                     city: args.city,
-                    specialty: args.specialty
+                    specialty: args.specialty,
+                    insId: args.insId
                 });
                 return doctor.save();
             }
@@ -184,7 +195,8 @@ const Mutation = new GraphQLObjectType({
                     insName: args.insName,
                     usualCoPay: args.usualCoPay,
                     docId: args.docId
-                })
+                });
+                return plan.save();
             }
         }
     }

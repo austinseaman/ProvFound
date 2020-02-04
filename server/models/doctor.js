@@ -5,7 +5,7 @@ const doctorSchema = new Schema({
     doctorName: String,
     city: String, 
     specialty: String,
-    insId: String
+    insId: Array
 })
 
 module.exports = mongoose.model('Doctor', doctorSchema);

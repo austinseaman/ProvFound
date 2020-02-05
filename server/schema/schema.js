@@ -10,58 +10,9 @@ const { GraphQLObjectType,
     GraphQLList,
 } = graphql;
 
-// let doctors = [
-//     {
-//         id: '1',
-//         insId: ['1', '4'],
-//         doctorName: 'Dr. Otto Octavius',
-//         city: 'Schenectady',
-//         specialty: 'Biotechnology'
-//     },
-//     {
-//         id: '2',
-//         insId: ['2', '3', '4'],
-//         doctorName: 'Dr. Walter Jackson Freeman II',
-//         city: 'Washington, D.C.',
-//         specialty: 'Neurology'
-//     },
-//     {
-//         id: '3',
-//         insId: ['3', '4'],
-//         doctorName: 'Dr. Jack Kevorkian',
-//         city: 'Pontiac',
-//         specialty: 'Pathology'
-//     }
-// ];
-
-// let plans = [
 //     // For each insurance plan, the 'docId' must correspond to
 //     // the 'id' of the doctor that takes that insurance.
-//     {
-//         id: '1',
-//         docId: ['1'],
-//         insName: 'SquidMed',
-//         usualCoPay: '$100'
-//     },
-//     {
-//         id: '2',
-//         docId: ['2'],
-//         insName: 'Transorbital',
-//         usualCoPay: '$25'
-//     },
-//     {
-//         id: '3',
-//         docId: ['2', '3'],
-//         insName: 'MuertAssist',
-//         usualCoPay: '$666'
-//     },
-//     {
-//         id: '4',
-//         docId: ['1', '2', '3'],
-//         insName: 'United',
-//         usualCoPay: '$30'
-//     }
-// ]
+
 
 // DoctorType sets up the schema for our provider. A model
 // for what data the doctor carries. The types must be
@@ -72,6 +23,7 @@ const { GraphQLObjectType,
 // Wrapping the 'fields' in a function prevents the code from
 // trying to execute, before the entirety of the file is
 // run. 
+
 const DoctorType = new GraphQLObjectType({
     name: 'Doctor',
     fields: () => ({

@@ -9,11 +9,13 @@ mongoose.connect('mongodb+srv://apseaman0:Coron%4012@cluster0-k9haj.mongodb.net/
 {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
+})
+.then(() => console.log("Connected to the DB"))
+.catch(e => console.log("DB error", e));
 
-mongoose.connection.once('open', () => {
-    console.log('Connected to the DB')
-});
+// mongoose.connection.once('open', () => {
+//     console.log('Connected to the DB')
+// });
 
 app.use('/graphql', graphqlHTTP({
     schema,

@@ -8,6 +8,7 @@ const { GraphQLObjectType,
     GraphQLString,
     GraphQLID,
     GraphQLList,
+    GraphQLNonNull
 } = graphql;
 
 //     // For each insurance plan, the 'docId' must correspond to
@@ -120,10 +121,10 @@ const Mutation = new GraphQLObjectType({
         addDoctor: {
             type: DoctorType,
             args: {
-                doctorName: { type: GraphQLString },
-                city: { type: GraphQLString },
-                specialty: { type: GraphQLString },
-                insId: { type: GraphQLID }
+                doctorName: { type: new GraphQLNonNull(GraphQLString) },
+                city: { type: new GraphQLNonNull(GraphQLString) },
+                specialty: { type: new GraphQLNonNull(GraphQLString) },
+                insId: { type: new GraphQLList(GraphQLID) }
             },
             resolve(parent, args){
                 let doctor = new Doctor({
@@ -138,9 +139,9 @@ const Mutation = new GraphQLObjectType({
         addPlan: {
             type: InsuranceType,
             args: {
-                insName: { type: GraphQLString },
-                usualCoPay: { type: GraphQLString },
-                docId: { type: GraphQLID }
+                insName: { type: new GraphQLNonNull(GraphQLString) },
+                usualCoPay: { type: new GraphQLNonNull(GraphQLString) },
+                docId: { type: new GraphQLList(GraphQLID) }
             },
             resolve(parent, args){
                 let plan = new Plan({
@@ -153,6 +154,7 @@ const Mutation = new GraphQLObjectType({
         }
     }
 })
+
 
 module.exports = new GraphQLSchema({
     query: RootQuery,

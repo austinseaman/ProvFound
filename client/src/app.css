@@ -1,0 +1,7 @@
+body {
+    background-color: dodgerblue;
+}
+h1, li, ul {
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

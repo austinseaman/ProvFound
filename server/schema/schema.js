@@ -28,7 +28,7 @@ const { GraphQLObjectType,
 const DoctorType = new GraphQLObjectType({
     name: 'Doctor',
     fields: () => ({
-        id: { type: GraphQLID },
+        id: { type: GraphQLString },
         doctorName: { type: GraphQLString },
         city: { type: GraphQLString },
         specialty: { type: GraphQLString },
@@ -80,7 +80,7 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         doctor: {
             type: DoctorType,
-            args: { id: { type: GraphQLID } },
+            args: { id: { type: GraphQLString } },
             resolve(parent, args) {
                 // Code to get data from DB or other source
                 // return _.find(doctors, { id: args.id });
@@ -128,6 +128,7 @@ const Mutation = new GraphQLObjectType({
             },
             resolve(parent, args){
                 let doctor = new Doctor({
+                    _id: args._id
                     doctorName: args.doctorName,
                     city: args.city,
                     specialty: args.specialty,

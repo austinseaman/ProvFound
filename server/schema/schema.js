@@ -128,7 +128,6 @@ const Mutation = new GraphQLObjectType({
             },
             resolve(parent, args){
                 let doctor = new Doctor({
-                    _id: args._id
                     doctorName: args.doctorName,
                     city: args.city,
                     specialty: args.specialty,
@@ -161,3 +160,5 @@ module.exports = new GraphQLSchema({
     query: RootQuery,
     mutation: Mutation
 });
+
+//adding comments to test whether or not commit is counting towards git graph

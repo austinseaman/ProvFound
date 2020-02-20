@@ -23,7 +23,7 @@ class DoctorList extends Component {
       return <div>Loading physicians...</div>;
     } else {
       return data.doctors.map(doctor => {
-        return <li key={doctor.id}>{doctor.doctorName}</li>;
+        return <li key={doctor.doctorName}>{doctor.doctorName}</li>;
       });
     }
   }

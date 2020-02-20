@@ -28,7 +28,7 @@ const { GraphQLObjectType,
 const DoctorType = new GraphQLObjectType({
     name: 'Doctor',
     fields: () => ({
-        id: { type: GraphQLString },
+        id: { type: GraphQLID },
         doctorName: { type: GraphQLString },
         city: { type: GraphQLString },
         specialty: { type: GraphQLString },
@@ -80,7 +80,7 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         doctor: {
             type: DoctorType,
-            args: { id: { type: GraphQLString } },
+            args: { id: { type: GraphQLID } },
             resolve(parent, args) {
                 // Code to get data from DB or other source
                 // return _.find(doctors, { id: args.id });

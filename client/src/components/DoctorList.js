@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
+import Doctor from "./Doctor";
+import Plan from "./Plan";
 
 const getDoctorsQuery = gql`
   {
@@ -22,9 +24,15 @@ class DoctorList extends Component {
     if (data.loading) {
       return <div>Loading physicians...</div>;
     } else {
-      return data.doctors.map(doctor => {
-        return <li key={doctor.doctorName}>{doctor.doctorName}</li>;
-      });
+      return data.doctors.map((doctor) => {
+        return <Doctor key={doctor.doctorName}
+                doctorName={doctor.doctorName}
+                specialty={doctor.specialty}
+                city={doctor.city}
+                insuranceAccepted={doctor.insuranceAccepted.map((ins) => <Plan key={ins.insName}
+                                                                          insName={ins.insName}
+                                                                          usualCoPay={ins.usualCoPay}/>)}/>
+                                                                        });
     }
   }
   render() {

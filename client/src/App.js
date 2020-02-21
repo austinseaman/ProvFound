@@ -1,19 +1,25 @@
-import React from 'react';
-import DoctorList from './components/DoctorList.js';
-import './app.css';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import DoctorList from "./components/DoctorList.js";
+import "./app.css";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import Navigation from './components/Nav'
 
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql'
-})
+  uri: "http://localhost:4000/graphql"
+});
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <div className="App">
-        <h1>Hello World!</h1>
+        <Navigation />
+        <Switch>
+          {/* <Route exact path="/" component={} />
+          <Route path="/about" component={} />
+          <Route path="/services" component={} /> */}
+        </Switch>
         <DoctorList />
       </div>
     </ApolloProvider>

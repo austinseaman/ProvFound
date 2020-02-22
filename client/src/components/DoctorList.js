@@ -22,7 +22,7 @@ class DoctorList extends Component {
   displayDocs() {
     let data = this.props.data;
     if (data.loading) {
-      return <div>Loading physicians...</div>;
+      return <div className="doctor-loading">Loading physicians...</div>;
     } else {
       return data.doctors.map((doctor) => {
         return <Doctor key={doctor.doctorName}
@@ -38,7 +38,7 @@ class DoctorList extends Component {
   render() {
       console.log(this.props.data.doctors)
     return (
-      <div>
+      <div className="doctorList-container">
         <ul>{this.displayDocs()}</ul>
       </div>
     );

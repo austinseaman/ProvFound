@@ -96,3 +96,17 @@ padding-left: 12px;
   font-size: 36px;
   text-decoration: none;
 }
+.home {
+  text-align: center;
+  padding: 40px;
+}
+#doctor {
+  width: 700px;
+  height: 400px;
+}
+.doctor-loading {
+  font-family: "Raleway";
+}
+.doctor-container {
+  font-family: "Raleway";
+}

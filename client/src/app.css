@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  background-color: whitesmoke;
+  background-color: cadetblue;
 }
 a {
   text-decoration: none;
@@ -96,13 +96,13 @@ padding-left: 12px;
   font-size: 36px;
   text-decoration: none;
 }
-.home {
+/* .home {
   text-align: center;
   padding: 40px;
-}
+} */
 #doctor {
-  width: 700px;
-  height: 400px;
+  width: 73.5%;
+  height: 100%;
 }
 .doctor-loading {
   font-family: "Raleway";

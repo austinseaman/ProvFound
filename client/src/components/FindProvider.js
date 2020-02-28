@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 
-class FindProvider extends PureComponent {
+class FindProvider extends Component {
     constructor(props) {
         super(props)
 

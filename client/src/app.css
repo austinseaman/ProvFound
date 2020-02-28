@@ -96,12 +96,11 @@ padding-left: 12px;
   font-size: 36px;
   text-decoration: none;
 }
-/* .home {
-  text-align: center;
-  padding: 40px;
-} */
+.home {
+  height: 100vh;
+}
 #doctor {
-  width: 73.5%;
+  width: 75%;
   height: 100%;
 }
 .doctor-loading {
@@ -109,4 +108,17 @@ padding-left: 12px;
 }
 .doctor-container {
   font-family: "Raleway";
+}
+.pf-intro {
+  position: relative;
+  bottom: 650px;
+  left: 900px;
+  background-color: white;
+  width: 400px;
+  height: 500px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 0px;
+  font-family: "Raleway";
+  
 }

@@ -7,7 +7,7 @@ function Home() {
       <img id="doctor" src={Doc} alt="doctor" />
         <h1 className="pf-intro">
         <br/>
-        Hello!
+        Welcome to ProvFound!
         <br />
         <br/>
         We've all struggled to find just the right doctor for ourselves or a loved one.

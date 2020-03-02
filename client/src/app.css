@@ -63,18 +63,15 @@ a {
   border-bottom-right-radius: 12px;
 
 }
-
 .dropdown-content h2 {
   width: auto;
   text-align: center;
   color: cadetblue;
   text-decoration: none;
 }
-
 .dropdown-content h2:hover {
   color: white;
 }
-
 .nav-right {
   display: flex;
   align-items: center;
@@ -82,13 +79,11 @@ a {
   font-size: 20px;
   font-family: "Raleway";
 }
-
 .nav-right link {
   font-family: inherit;
   color: inherit;
   text-decoration: none;
 }
-
 .nav-logo h1 {
 padding-left: 12px;
   color: cadetblue;
@@ -103,10 +98,13 @@ padding-left: 12px;
   width: 75%;
   height: 100%;
 }
-.doctor-loading {
+.loading {
   font-family: "Raleway";
 }
 .doctor-container {
+  font-family: "Raleway";
+}
+.plan-container {
   font-family: "Raleway";
 }
 .pf-intro {

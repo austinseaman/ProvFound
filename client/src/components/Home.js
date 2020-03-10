@@ -1,5 +1,4 @@
 import React from "react";
-import PlanList from "./PlanList"
 import Doc from "../photos/doctor.jpg";
 
 function Home() {
@@ -17,7 +16,6 @@ function Home() {
         <br />
         We've made it easier for you! Your provider is FOUND.
         </h1>
-        {/* <PlanList /> */}
     </div>
   );
 }
